@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A83B7FFA-57B3-4DCC-AA07-8DF7E448ECCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnityExtended</RootNamespace>
+    <AssemblyName>UnityExtended</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\Program Files\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\EProcess.cs" />
+    <Compile Include="Extensions\InterfaceExtensions.cs" />
+    <Compile Include="Extensions\MaterialExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\MonoBehaviourExtensions.cs" />
+    <Compile Include="Extensions\SystemExtensions.cs" />
+    <Compile Include="Extensions\CameraExtensions.cs" />
+    <Compile Include="Extensions\VectorExtensions.cs" />
+    <Compile Include="Interpolation\Bezier.cs" />
+    <Compile Include="System\Diagnostics.cs" />
+    <Compile Include="Threading\Coroutine\CoroutineQueue.cs" />
+    <Compile Include="Threading\Coroutine\Coroutinex.cs" />
+    <Compile Include="Threading\Singleton\GameSingleton.cs" />
+    <Compile Include="Threading\Singleton\SceneSingleton.cs" />
+    <Compile Include="Threading\Coroutine\Coroutiner.cs" />
+    <Compile Include="Threading\Process.cs" />
+    <Compile Include="Tools\DebugExtension.cs" />
+    <Compile Include="Editor\PropertyDrawers.cs" />
+    <Compile Include="Enums\EInclusion.cs" />
+    <Compile Include="Enums\EPhase.cs" />
+    <Compile Include="Extensions\BoundsExtensions.cs" />
+    <Compile Include="Extensions\ComponentExtensions.cs" />
+    <Compile Include="Extensions\FloatExtensions.cs" />
+    <Compile Include="Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\LayerMaskExtensions.cs" />
+    <Compile Include="Interfaces\IClamp.cs" />
+    <Compile Include="Interfaces\IContains.cs" />
+    <Compile Include="Interfaces\ILerp.cs" />
+    <Compile Include="Threading\Coroutine\ManagedCoroutine.cs" />
+    <Compile Include="Threading\Coroutine\LerpCoroutine.cs" />
+    <Compile Include="Threading\Coroutine\DelayCoroutine.cs" />
+    <Compile Include="Threading\Singleton\Singleton.cs" />
+    <Compile Include="Threading\Singleton\ScriptableSingleton.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Range\Bounded\BoundedColor.cs" />
+    <Compile Include="Range\Bounded\BoundedValue.cs" />
+    <Compile Include="Range\Bounded\BoundedVector2.cs" />
+    <Compile Include="Range\Bounded\InterpolableBoundedValue.cs" />
+    <Compile Include="Range\Bounded\InterpolableBoundedNumber.cs" />
+    <Compile Include="Range\ColorRange.cs" />
+    <Compile Include="Range\Bounded\BoundedVector4.cs" />
+    <Compile Include="Range\Bounded\BoundedVector3.cs" />
+    <Compile Include="Range\InterpolableNumericRange.cs" />
+    <Compile Include="Range\Vector2Range.cs" />
+    <Compile Include="Range\Vector4Range.cs" />
+    <Compile Include="Range\Bounded\BoundedVector.cs" />
+    <Compile Include="Range\VectorRange.cs" />
+    <Compile Include="Range\Vector3Range.cs" />
+    <Compile Include="Geometry\Geometry.cs" />
+    <Compile Include="Range\InterpolableRange.cs" />
+    <Compile Include="Range\Bounded\BoundedFloat.cs" />
+    <Compile Include="Range\Bounded\BoundedInt.cs" />
+    <Compile Include="Range\Bounded\BoundedNumber.cs" />
+    <Compile Include="Interfaces\IRange.cs" />
+    <Compile Include="Range\NumericRange.cs" />
+    <Compile Include="Range\Range.cs" />
+    <Compile Include="Range\FloatRange.cs" />
+    <Compile Include="Range\IntRange.cs" />
+    <Compile Include="Tools\HDebug.cs" />
+    <Compile Include="Tools\HGizmos.cs" />
+    <Compile Include="Tools\HMath.cs" />
+    <Compile Include="Tools\HRandom.cs" />
+    <Compile Include="Tools\HScreen.cs" />
+    <Compile Include="Tools\HUtils.cs" />
+    <Compile Include="UI\Segment.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pooling\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
