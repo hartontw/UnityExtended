@@ -20,14 +20,14 @@ namespace UnityExtended
 
         public ManagedCoroutine()
         {
-            Info = behaviour.name + ": " + GetType() + " is waiting.";
             this.behaviour = Coroutiner.Instance;
+            Info = behaviour.name + ": " + GetType() + " is waiting.";
         }
 
         public ManagedCoroutine(MonoBehaviour behaviour)
         {
-            Info = behaviour.name + ": " + GetType() + " is waiting.";
             this.behaviour = behaviour ?? Coroutiner.Instance;
+            Info = behaviour.name + ": " + GetType() + " is waiting.";
         }
 
         public override void Start()

@@ -22,6 +22,7 @@ namespace UnityExtended
 
                     yield return new WaitForEndOfFrame();
                 }
+                action(lerper.Lerp(1F));
             }
         }
 
