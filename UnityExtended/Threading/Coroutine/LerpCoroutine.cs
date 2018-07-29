@@ -17,7 +17,8 @@ namespace UnityExtended
                 float t = 0F;
                 while(t < 1F)
                 {
-                    action(lerper.Lerp(t));
+                    InterpolatedValue = lerper.Lerp(t);
+                    action(InterpolatedValue);
                     t = InterpolationValue;
 
                     yield return new WaitForEndOfFrame();
@@ -26,6 +27,7 @@ namespace UnityExtended
             }
         }
 
+        public T InterpolatedValue { get; private set; }
         public float InterpolationValue { get { return RunningTime / duration; } }
 
         public readonly float duration;

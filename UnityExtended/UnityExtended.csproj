@@ -51,8 +51,10 @@
     <Compile Include="Extensions\MonoBehaviourExtensions.cs" />
     <Compile Include="Extensions\SystemExtensions.cs" />
     <Compile Include="Extensions\CameraExtensions.cs" />
+    <Compile Include="Extensions\TransformExtensions.cs" />
     <Compile Include="Extensions\VectorExtensions.cs" />
     <Compile Include="Interpolation\Bezier.cs" />
+    <Compile Include="Range\QuaternionRange.cs" />
     <Compile Include="System\Diagnostics.cs" />
     <Compile Include="Threading\Coroutine\CoroutineQueue.cs" />
     <Compile Include="Threading\Coroutine\Coroutinex.cs" />
