@@ -54,5 +54,8 @@ namespace UnityExtended
             coroutine.Start();
             return coroutine;
         }
+
+        public static implicit operator T(LerpCoroutine<T> coroutine) { return coroutine.InterpolatedValue; }
+        public static implicit operator float(LerpCoroutine<T> coroutine) { return coroutine.InterpolationValue; }
     }
 }

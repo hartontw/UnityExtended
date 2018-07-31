@@ -122,6 +122,16 @@ namespace UnityExtended
         public const float PI = 3.14159274F;
 
         /// <summary>
+        /// Half of PI value (Read Only).
+        /// </summary>
+        public const float HalfPI = PI / 2F;
+
+        /// <summary>
+        /// Double of PI value (Read Only).
+        /// </summary>
+        public const float PI2 = PI * 2F;
+
+        /// <summary>
         /// A representation of positive infinity (Read Only).
         /// </summary>
         public const float Infinity = float.PositiveInfinity;
