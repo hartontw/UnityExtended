@@ -67,20 +67,24 @@ namespace UnityExtended
         public static LerpCoroutine<Quaternion> SetRotation(this Transform self, Quaternion rotation, float duration, bool slerp = true)
         {
             QuaternionRange range = new QuaternionRange(self.rotation, rotation);
+
             LerpCoroutine<Quaternion> coroutine;
+
             if (slerp)
             {
-                coroutine = new LerpCoroutine<Quaternion>(coroutine, range,
-                    (l) => coroutine.InterpolatedValue)
+                coroutine = new LerpCoroutine<Quaternion>(duration, range, Quaternion.Slerp,
+                    (l) => { if (self) self.rotation = l; });
             }
             else
             {
                 coroutine = new LerpCoroutine<Quaternion>(duration, range,
                     (l) => { if (self) self.rotation = l; }
                 );
-                coroutine.Start();
-                return coroutine;
             }
+
+            coroutine.Start();
+
+            return coroutine;
         }
     }
 }

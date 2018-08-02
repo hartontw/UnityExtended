@@ -30,6 +30,34 @@ namespace UnityExtended
         public abstract T Lerp(float t);
 
         /// <summary>
+        /// Interpolates between min and max by t.
+        /// </summary>
+        /// <param name="t">
+        /// The interpolation value between 0f and 1f.
+        /// </param>
+        /// <param name="function">
+        /// The interpolation function.
+        /// </param>
+        public T Lerp(float t, Func<float, float> function)
+        {
+            return Lerp(function(t));
+        }
+
+        /// <summary>
+        /// Interpolates between min and max by t.
+        /// </summary>
+        /// <param name="t">
+        /// The interpolation value between 0f and 1f.
+        /// </param>
+        /// <param name="function">
+        /// The Easing function.
+        /// </param>
+        public T Lerp(float t, Easing.Functions function)
+        {
+            return Lerp(t, Easing.Get(function));
+        }
+
+        /// <summary>
         /// Returns random value between min and max.
         /// </summary>
         public T Random { get { return Lerp(HRandom.Value); } }

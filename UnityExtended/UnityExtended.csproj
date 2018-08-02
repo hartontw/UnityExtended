@@ -55,10 +55,13 @@
     <Compile Include="Extensions\VectorExtensions.cs" />
     <Compile Include="Interpolation\Bezier.cs" />
     <Compile Include="Interpolation\Easing.cs" />
+    <Compile Include="Interpolation\Interpolation.cs" />
     <Compile Include="Range\QuaternionRange.cs" />
     <Compile Include="System\Diagnostics.cs" />
     <Compile Include="Threading\Coroutine\CoroutineQueue.cs" />
     <Compile Include="Threading\Coroutine\Coroutinex.cs" />
+    <Compile Include="Threading\Coroutine\PeriodicalCoroutine.cs" />
+    <Compile Include="Threading\Coroutine\UpdateCoroutine.cs" />
     <Compile Include="Threading\Singleton\GameSingleton.cs" />
     <Compile Include="Threading\Singleton\SceneSingleton.cs" />
     <Compile Include="Threading\Coroutine\Coroutiner.cs" />

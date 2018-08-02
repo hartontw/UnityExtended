@@ -59,6 +59,11 @@ namespace UnityExtended
         /// <summary>
         /// 
         /// </summary>
+        public static float Linear(float t) { return t; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static float EaseInOut(float t, Func<float, float> easein, Func<float, float> easeout)
         {
             t *= 2F;
@@ -1458,6 +1463,7 @@ namespace UnityExtended
         {
             switch (function)
             {
+                case Functions.Linear: return Linear;
                 case Functions.EaseInSine: return EaseInSine;
                 case Functions.EaseOutSine: return EaseOutSine;
                 case Functions.EaseInOutSine: return EaseInOutSine;
@@ -1498,42 +1504,8 @@ namespace UnityExtended
                 case Functions.EaseOutBounce: return EaseOutBounce;
                 case Functions.EaseInOutBounce: return EaseInOutBounce;
                 case Functions.EaseOutInBounce: return EaseOutInBounce;
+                default: return Linear;
             }
-
-            return (t) => { return t; };
-        }
-
-        public static Func<float, Vector2> GetVector2(Func<float, float> function, Vector2 start, Vector2 end, float duration)
-        {
-            return (t) =>
-            {
-                t = Mathf.Clamp01(t / duration);
-                Vector2 direction = end - start;
-                float p = direction.x / direction.y;
-                return new Vector2(direction.y * p * t, direction.y * function(t));
-            };
-        }
-
-        public static Func<float, Vector2> GetVector2(Functions function, Vector2 start, Vector2 end, float duration)
-        {
-            return GetVector2(Get(function), start, end, duration);
-        }
-
-        public static Func<float, Vector3> GetVector3(Func<float, float> function, Vector3 start, Vector3 end, float duration, Vector3 plane)
-        {
-            return (t) =>
-            {
-                t = Mathf.Clamp01(t / duration);
-                Vector3 direction = end - start;
-                Vector3 projected = Vector3.ProjectOnPlane(direction, plane);
-                float p = projected.x / projected.y;
-                return Vector3.Cross(new Vector3(projected.y * p * t, projected.y * function(t)), direction);
-            };
-        }
-
-        public static Func<float, Vector3> GetVector3(Functions function, Vector3 start, Vector3 end, float duration, Vector3 plane)
-        {
-            return GetVector3(Get(function), start, end, duration, plane);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace UnityExtended
 {
     /// <summary>
@@ -8,5 +9,7 @@ namespace UnityExtended
     public interface ILerp<T>
     {
         T Lerp(float t);
+        T Lerp(float t, Func<float, float> function);
+        T Lerp(float t, Easing.Functions function);
     }
 }

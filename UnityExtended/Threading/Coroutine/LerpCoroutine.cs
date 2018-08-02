@@ -8,22 +8,20 @@ namespace UnityExtended
     /// <summary>
     /// 
     /// </summary>
-    public class LerpCoroutine<T> : ManagedCoroutine
+    public class LerpCoroutine<T> : UpdateCoroutine<float>
     {
         public override IEnumerator Routine
         {
             get
             {
                 float t = 0F;
-                while(t < 1F)
+                while (t < 1F)
                 {
-                    InterpolatedValue = lerper.Lerp(t);
-                    action(InterpolatedValue);
+                    action(t);
+                    yield return base.Routine;
                     t = InterpolationValue;
-
-                    yield return new WaitForEndOfFrame();
                 }
-                action(lerper.Lerp(1F));
+                action(1F);
             }
         }
 
@@ -31,28 +29,125 @@ namespace UnityExtended
         public float InterpolationValue { get { return RunningTime / duration; } }
 
         public readonly float duration;
-        public readonly ILerp<T> lerper;
-        public readonly Action<T> action;
 
         public LerpCoroutine(float duration, ILerp<T> lerper, Action<T> action) : base()
         {
             this.duration = duration > 0F ? duration : Mathf.Epsilon;
-            this.lerper = lerper;
-            this.action = action;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t);
+                action(InterpolatedValue);
+            };
         }
 
-        public LerpCoroutine(MonoBehaviour owner, float duration, ILerp<T> lerper, Action<T> action) : base(owner)
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, ILerp<T> lerper, Action<T> action) : base(behaviour)
         {
             this.duration = duration > 0F ? duration : Mathf.Epsilon;
-            this.lerper = lerper;
-            this.action = action;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t);
+                action(InterpolatedValue);
+            };
         }
 
-        public static LerpCoroutine<T> Start(float duration, ILerp<T> lerper, Action<T> action)
+        public LerpCoroutine(float duration, ILerp<T> lerper, Func<float, float> function, Action<T> action) : base()
         {
-            LerpCoroutine<T> coroutine = new LerpCoroutine<T>(duration, lerper, action);
-            coroutine.Start();
-            return coroutine;
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t, function);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, ILerp<T> lerper, Func<float, float> function, Action<T> action) : base(behaviour)
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t, function);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(float duration, ILerp<T> lerper, Easing.Functions function, Action<T> action) : base()
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t, Easing.Get(function));
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, ILerp<T> lerper, Easing.Functions function, Action<T> action) : base(behaviour)
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = lerper.Lerp(t, Easing.Get(function));
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(float duration, T start, T end, Func<T, T, float, T> function, Action<T> action) : base()
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(start, end, t);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, T start, T end, Func<T, T, float, T> function, Action<T> action) : base(behaviour)
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(start, end, t);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(float duration, IRange<T> range, Func<T, T, float, T> function, Action<T> action) : base()
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(range.Min, range.Max, t);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, IRange<T> range, Func<T, T, float, T> function, Action<T> action) : base(behaviour)
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(range.Min, range.Max, t);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(float duration, Func<float, T> function, Action<T> action) : base()
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(t);
+                action(InterpolatedValue);
+            };
+        }
+
+        public LerpCoroutine(MonoBehaviour behaviour, float duration, Func<float, T> function, Action<T> action) : base(behaviour)
+        {
+            this.duration = duration > 0F ? duration : Mathf.Epsilon;
+            this.action = (t) =>
+            {
+                InterpolatedValue = function(t);
+                action(InterpolatedValue);
+            };
         }
 
         public static implicit operator T(LerpCoroutine<T> coroutine) { return coroutine.InterpolatedValue; }

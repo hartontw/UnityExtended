@@ -9,12 +9,12 @@ namespace UnityExtended
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableObject
+    public abstract class ScriptableSingleton<T> : ScriptableObject where T : ScriptableObject
     {
         private static readonly object _lock = new object();
         private static T _instance;
 
-        private ScriptableSingleton() { }
+        protected ScriptableSingleton() { }
 
         public static T Instance
         {
