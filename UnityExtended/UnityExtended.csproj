@@ -113,6 +113,7 @@
     <Compile Include="Tools\HGizmos.cs" />
     <Compile Include="Tools\HMath.cs" />
     <Compile Include="Tools\HRandom.cs" />
+    <Compile Include="Tools\HRegex.cs" />
     <Compile Include="Tools\HScreen.cs" />
     <Compile Include="Tools\HUtils.cs" />
     <Compile Include="UI\Segment.cs" />

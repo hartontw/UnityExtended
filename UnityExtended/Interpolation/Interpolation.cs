@@ -18,6 +18,7 @@ namespace UnityExtended
         public static Func<float, float> Plot(string formula)
         {
             formula = formula.Replace(" ", "");
+            
 
             return (t) =>
             {
