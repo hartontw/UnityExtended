@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,18 +17,25 @@ namespace UnityExtended
         {
             t = HMath.Clamp01(t);
 
-            float d = 1F - t;
+            float d = t - 1F;
 
             return p2 * (t * t) - 2F * p1 * d * t + p0 * (d * d);
         }
 
         public static float FirstDerivative(float t, float p0, float p1, float p2)
         {
-            return 2F * ((p2 - 2F * p1 + p0) * t + p1 - p0);
+            return 2F * ((p2 - 2F * p1 + p0) * HMath.Clamp01(t) + p1 - p0);
+        }
+
+        public static float Speed(float t, float duration, float p0, float p1, float p2)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2) / duration;
         }
 
         public static float Lerp(float t, float p0, float p1, float p2, float p3)
         {
+            t = HMath.Clamp01(t);
+
             float d = 1F - t;
             float td3 = 3F * t * d;
 
@@ -36,7 +44,13 @@ namespace UnityExtended
 
         public static float FirstDerivative(float t, float p0, float p1, float p2, float p3)
         {
+            t = HMath.Clamp01(t);
             return 3F * ((p3 - 3F * p2 + 3F * p1 - p0) * (t * t) + 2F * (p2 - 2F * p1 + p0) * t + p1 - p0);
+        }
+
+        public static float Speed(float t, float duration, float p0, float p1, float p2, float p3)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2, p3) / duration;
         }
 
         public static float Lerp(float t, params float[] points)
@@ -67,18 +81,30 @@ namespace UnityExtended
         {
             t = HMath.Clamp01(t);
 
-            float d = 1F - t;
+            float d = t - 1F;
 
             return p2 * (t * t) - 2F * p1 * d * t + p0 * (d * d);
         }
 
         public static Vector2 FirstDerivative(float t, Vector2 p0, Vector2 p1, Vector2 p2)
         {
-            return 2F * ((p2 - 2F * p1 + p0) * t + p1 - p0);
+            return 2F * ((p2 - 2F * p1 + p0) * HMath.Clamp01(t) + p1 - p0);
+        }
+
+        public static Vector2 Velocity(float t, float duration, Vector2 p0, Vector2 p1, Vector2 p2)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2) / duration;
+        }
+
+        public static Vector2 Tangent(float t, float duration, Vector2 p0, Vector2 p1, Vector2 p2)
+        {
+            return Velocity(t, duration, p0, p1, p2).normalized;
         }
 
         public static Vector2 Lerp(float t, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
         {
+            t = HMath.Clamp01(t);
+
             float d = 1F - t;
             float td3 = 3F * t * d;
 
@@ -87,7 +113,18 @@ namespace UnityExtended
 
         public static Vector2 FirstDerivative(float t, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
         {
+            t = HMath.Clamp01(t);
             return 3F * ((p3 - 3F * p2 + 3F * p1 - p0) * (t * t) + 2F * (p2 - 2F * p1 + p0) * t + p1 - p0);
+        }
+
+        public static Vector2 Velocity(float t, float duration, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2, p3) / duration;
+        }
+
+        public static Vector2 Tangent(float t, float duration, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
+        {
+            return Velocity(t, duration, p0, p1, p2, p3).normalized;
         }
 
         public static Vector2 Lerp(float t, params Vector2[] points)
@@ -118,19 +155,30 @@ namespace UnityExtended
         {
             t = HMath.Clamp01(t);
 
-            float d = 1F - t;
+            float d = t - 1F;
 
             return p2 * (t * t) - 2F * p1 * d * t + p0 * (d * d);
         }
 
         public static Vector3 FirstDerivative(float t, Vector3 p0, Vector3 p1, Vector3 p2)
         {
-            return 2F * ((p2 + p0) * t + p1 * t - p0);
-            //return 2F * ((p2 - 2F * p1 + p0) * t + p1 - p0);
+            return 2F * ((p2 - 2F * p1 + p0) * HMath.Clamp01(t) + p1 - p0);
+        }
+
+        public static Vector3 Velocity(float t, float duration, Vector3 p0, Vector3 p1, Vector3 p2)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2) / duration;
+        }
+
+        public static Vector3 Tangent(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+        {
+            return FirstDerivative(t, p0, p1, p2).normalized;
         }
 
         public static Vector3 Lerp(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
         {
+            t = HMath.Clamp01(t);
+
             float d = 1F - t;
             float td3 = 3F * t * d;
 
@@ -139,7 +187,18 @@ namespace UnityExtended
 
         public static Vector3 FirstDerivative(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
         {
+            t = HMath.Clamp01(t);
             return 3F * ((p3 - 3F * p2 + 3F * p1 - p0) * (t * t) + 2F * (p2 - 2F * p1 + p0) * t + p1 - p0);
+        }
+
+        public static Vector3 Velocity(float t, float duration, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2, p3) / duration;
+        }
+
+        public static Vector3 Tangent(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+        {
+            return FirstDerivative(t, p0, p1, p2, p3).normalized;
         }
 
         public static Vector3 Lerp(float t, params Vector3[] points)
@@ -171,18 +230,30 @@ namespace UnityExtended
         {
             t = HMath.Clamp01(t);
 
-            float d = 1F - t;
+            float d = t - 1F;
 
             return p2 * (t * t) - 2F * p1 * d * t + p0 * (d * d);
         }
 
         public static Vector4 FirstDerivative(float t, Vector4 p0, Vector4 p1, Vector4 p2)
         {
-            return 2F * ((p2 - 2F * p1 + p0) * t + p1 - p0);
+            return 2F * ((p2 - 2F * p1 + p0) * HMath.Clamp01(t) + p1 - p0);
+        }
+
+        public static Vector4 Velocity(float t, float duration, Vector4 p0, Vector4 p1, Vector4 p2)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2) / duration;
+        }
+
+        public static Vector4 Tangent(float t, Vector4 p0, Vector4 p1, Vector4 p2)
+        {
+            return FirstDerivative(t, p0, p1, p2).normalized;
         }
 
         public static Vector4 Lerp(float t, Vector4 p0, Vector4 p1, Vector4 p2, Vector4 p3)
         {
+            t = HMath.Clamp01(t);
+
             float d = 1F - t;
             float td3 = 3F * t * d;
 
@@ -192,6 +263,16 @@ namespace UnityExtended
         public static Vector4 FirstDerivative(float t, Vector4 p0, Vector4 p1, Vector4 p2, Vector4 p3)
         {
             return 3F * ((p3 - 3F * p2 + 3F * p1 - p0) * (t * t) + 2F * (p2 - 2F * p1 + p0) * t + p1 - p0);
+        }
+
+        public static Vector4 Velocity(float t, float duration, Vector4 p0, Vector4 p1, Vector4 p2, Vector4 p3)
+        {
+            return FirstDerivative(t / duration, p0, p1, p2, p3) / duration;
+        }
+
+        public static Vector4 Tangent(float t, Vector4 p0, Vector4 p1, Vector4 p2, Vector4 p3)
+        {
+            return FirstDerivative(t, p0, p1, p2, p3).normalized;
         }
 
         public static Vector4 Lerp(float t, params Vector4[] points)
@@ -230,11 +311,13 @@ namespace UnityExtended
 
         public static Color FirstDerivative(float t, Color p0, Color p1, Color p2)
         {
-            return 2F * ((p2 - 2F * p1 + p0) * t + p1 - p0);
+            return 2F * ((p2 - 2F * p1 + p0) * HMath.Clamp01(t) + p1 - p0);
         }
 
         public static Color Lerp(float t, Color p0, Color p1, Color p2, Color p3)
         {
+            t = HMath.Clamp01(t);
+
             float d = 1F - t;
             float td3 = 3F * t * d;
 
@@ -243,6 +326,7 @@ namespace UnityExtended
 
         public static Color FirstDerivative(float t, Color p0, Color p1, Color p2, Color p3)
         {
+            t = HMath.Clamp01(t);
             return 3F * ((p3 - 3F * p2 + 3F * p1 - p0) * (t * t) + 2F * (p2 - 2F * p1 + p0) * t + p1 - p0);
         }
 
