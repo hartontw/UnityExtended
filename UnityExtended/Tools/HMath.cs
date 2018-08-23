@@ -10,112 +10,7 @@ namespace UnityExtended
     /// An extended version of UnityEngine.Mathf
     /// </summary>
     public static class HMath
-    {
-        public class PrimesSet
-        {
-            public PrimesSet() { }
-
-            public PrimesSet(int index)
-            {
-                Calculate(index);
-            }
-
-            public int this[int index] { get { return Get(index); } }
-
-            /// <summary>
-            /// Ordered list of primes numbers.
-            /// </summary>
-            private readonly List<int> ordered = new List<int>() { 2 };
-
-            /// <summary>
-            /// Retrieves a prime number given its index.
-            /// </summary>
-            public int Get(int index)
-            {
-                if (!ordered.Contains(index))
-                    Calculate(index);
-
-                return ordered[index];
-            }
-
-            /// <summary>
-            /// Checks is a given number is prime.
-            /// </summary>
-            public bool Is(int n)
-            {
-                if (ordered.Contains(n))
-                    return true;
-
-                int last = ordered.Last();
-
-                while (last < n)
-                {
-                    Calculate(ordered.Bound() + 1);
-
-                    last = ordered.Last();
-                }
-
-                if (last == n)
-                    return true;
-
-                return false;
-            }
-
-            /// <summary>
-            /// Calculates a prime number given its index.
-            /// </summary>
-            private void Calculate(int index)
-            {
-                int candidate = ordered.Last();
-
-                while (index > ordered.Bound())
-                {
-                    candidate++;
-
-                    bool isPrime = true;
-
-                    for (int j = 0; j < ordered.Count; j++)
-                    {
-                        if (candidate % ordered[j] == 0)
-                        {
-                            isPrime = false;
-                            break;
-                        }
-                    }
-
-                    if (isPrime)
-                        ordered.Add(candidate);
-                }
-            }
-        }
-
-        public static double Gamma(double z)
-        {
-            const int g = 7;
-            double[] p = {0.99999999999980993, 676.5203681218851, -1259.1392167224028,
-         771.32342877765313, -176.61502916214059, 12.507343278686905,
-         -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7};
-
-            // Reflection formula
-            if (z < 0.5)
-            {
-                return Math.PI / (Math.Sin(Math.PI * z) * Gamma(1 - z));
-            }
-            else
-            {
-                z -= 1;
-                double x = p[0];
-                for (var i = 1; i < g + 2; i++)
-                {
-                    x += p[i] / (z + i);
-                }
-                double t = z + g + 0.5;
-                return Math.Sqrt(2 * Math.PI) * (Math.Pow(t, z + 0.5)) * Math.Exp(-t) * x;
-            }
-        }
-
-        public readonly static PrimesSet Primes = new PrimesSet();
-
+    {        
         /// <summary>
         /// The infamous 3.14159265358979... value (Read Only).
         /// </summary>
@@ -377,6 +272,25 @@ namespace UnityExtended
         /// Returns the closest power of two value.
         /// </summary>
         public static int ClosestPowerOfTwo(int value) { return Mathf.ClosestPowerOfTwo(value); }
+
+        /// <summary>
+        /// Find the number of possible combinations that can be obtained by taking a sample of items from a set of objects.
+        /// </summary>
+        public static int Combinations(int objects, int sample)
+        {
+            if (sample > objects) return 0;
+            if (sample == objects) return 1;
+
+            if (sample > objects - sample)
+                sample = objects - sample;
+
+            int combinations = 1;
+
+            for (int i = 1; i <= sample; i++, objects--)
+                combinations = (combinations * objects) / i;
+
+            return combinations;
+        }
 
         /// <summary>
         /// Convert a color temperature in Kelvin to RGB color.
