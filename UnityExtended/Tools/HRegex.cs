@@ -8,12 +8,12 @@ namespace UnityExtended
 {
     public static class HRegex
     {
-        public string GroupByParentheses(string text)
+        /*public string GroupByParentheses(string text)
         {
             Regex regex = new Regex(@"(?=(\(([^()]+| (?<Level>\()| (?<-Level>\)))+(?(Level)(?!))\)))", RegexOptions.IgnorePatternWhitespace);
             var results = regex.Matches(text).Cast<Match>()
                            .Select(p => p.Groups[1].Value)
                            .ToList();
-        }
+        }*/
     }
 }
