@@ -58,6 +58,14 @@ namespace UnityExtended
             return Mathf.FloorToInt(Mathf.Lerp(min, max, t));
         }
 
+        /// <summary>
+        /// Returns value between 0f and 1f based on the current value.
+        /// </summary>
+        public override float InverseLerp()
+        {
+            return (Value - Min) / (float)Length;
+        }
+
         public static implicit operator string(BoundedInt bounded) { return bounded.Value.ToString(); }
         public static implicit operator int(BoundedInt bounded) { return bounded.Value; }
         public static BoundedInt operator +(BoundedInt bounded, int value) { return new BoundedInt(bounded.min, bounded.max, bounded.Value + value); }

@@ -5,6 +5,50 @@ using System.Collections.Generic;
 
 namespace UnityExtended
 {
+    public static class Geometry
+    {
+        public static Bounds GetBounds(params Bounds[] bounds)
+        {
+            float mx = bounds[0].min.x;
+            float my = bounds[0].min.y;
+            float mz = bounds[0].min.z;
+            float Mx = bounds[0].max.x;
+            float My = bounds[0].max.y;
+            float Mz = bounds[0].max.z;
+
+            for (int i = 1; i < bounds.Length; i++)
+            {
+                mx = HMath.Min(mx, bounds[i].min.x);
+                my = HMath.Min(my, bounds[i].min.y);
+                mz = HMath.Min(mz, bounds[i].min.z);
+                Mx = HMath.Max(Mx, bounds[i].max.x);
+                My = HMath.Max(My, bounds[i].max.y);
+                Mz = HMath.Max(Mz, bounds[i].max.z);
+            }
+
+            Vector3 size = new Vector3(Mx - mx, My - my, Mz - mz);
+            Vector3 center = new Vector3(mx, my, mz) + size / 2F;
+
+            return new Bounds(center, size);
+        }
+
+        public static Bounds GetBounds(params Renderer[] renderers)
+        {
+            Bounds[] bounds = new Bounds[renderers.Length];
+            for (int i = 0; i < renderers.Length; i++)
+                bounds[i] = renderers[i].bounds;
+            return GetBounds(bounds);
+        }
+
+        public static Bounds GetBounds(params Collider[] colliders)
+        {
+            Bounds[] bounds = new Bounds[colliders.Length];
+            for (int i = 0; i < colliders.Length; i++)
+                bounds[i] = colliders[i].bounds;
+            return GetBounds(bounds);
+        }
+    }
+
     [Serializable]
     public struct Point
     {

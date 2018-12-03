@@ -36,14 +36,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Groups.cs" />
     <Compile Include="Enums\EProcess.cs" />
     <Compile Include="Extensions\InterfaceExtensions.cs" />
     <Compile Include="Extensions\MaterialExtensions.cs" />
@@ -67,7 +65,6 @@
     <Compile Include="Threading\Coroutine\Coroutiner.cs" />
     <Compile Include="Threading\Process.cs" />
     <Compile Include="Tools\DebugExtension.cs" />
-    <Compile Include="Editor\PropertyDrawers.cs" />
     <Compile Include="Enums\EInclusion.cs" />
     <Compile Include="Enums\EPhase.cs" />
     <Compile Include="Extensions\BoundsExtensions.cs" />
@@ -110,7 +107,6 @@
     <Compile Include="Range\FloatRange.cs" />
     <Compile Include="Range\IntRange.cs" />
     <Compile Include="Tools\HDebug.cs" />
-    <Compile Include="Tools\HGizmos.cs" />
     <Compile Include="Tools\HMath.cs" />
     <Compile Include="Tools\HRandom.cs" />
     <Compile Include="Tools\HRegex.cs" />

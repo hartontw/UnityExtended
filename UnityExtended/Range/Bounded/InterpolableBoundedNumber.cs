@@ -80,6 +80,11 @@ namespace UnityExtended
         }
 
         /// <summary>
+        /// Returns value between 0f and 1f based on the current value.
+        /// </summary>
+        public abstract float InverseLerp();
+
+        /// <summary>
         /// Returns a random value between min and max.
         /// </summary>
         public T Random { get { return Lerp(HRandom.Value); } }

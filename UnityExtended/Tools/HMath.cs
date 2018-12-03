@@ -132,6 +132,71 @@ namespace UnityExtended
         public static float Atan2(float y, float x) { return Mathf.Atan2(y, x); }
 
         /// <summary>
+        /// Returns the average of a group of values.
+        /// </summary>
+        public static float Average(params float[] values)
+        {
+            float total = 0F;
+
+            for (int i = 0; i < values.Length; i++)
+                total += values[i];
+
+            return total / values.Length;
+        }
+
+        /// <summary>
+        /// Returns the average of a group of values.
+        /// </summary>
+        public static Vector2 Average(params Vector2[] values)
+        {
+            Vector2 total = Vector2.zero;
+
+            for (int i = 0; i < values.Length; i++)
+                total += values[i];
+
+            return total / values.Length;
+        }
+
+        /// <summary>
+        /// Returns the average of a group of values.
+        /// </summary>
+        public static Vector3 Average(params Vector3[] values)
+        {
+            Vector3 total = Vector3.zero;
+
+            for (int i = 0; i < values.Length; i++)
+                total += values[i];
+
+            return total / values.Length;
+        }
+
+        /// <summary>
+        /// Returns the average of a group of values.
+        /// </summary>
+        public static Vector4 Average(params Vector4[] values)
+        {
+            Vector4 total = Vector4.zero;
+
+            for (int i = 0; i < values.Length; i++)
+                total += values[i];
+
+            return total / values.Length;
+        }
+
+        /// <summary>
+        /// Returns the average of a group of values.
+        /// </summary>
+        public static Color Average(params Color[] values)
+        {
+            Color total = Color.black;
+
+            for (int i = 0; i < values.Length; i++)
+                total += values[i];
+
+            return total / values.Length;
+        }
+
+        /// <summary>
         /// Returns if a value is between min [inclusive] and max [inclusive].
         /// </summary>
         public static bool Between(float min, float max, float value)
