@@ -1,3 +1,11 @@
+# Visual Studio cache directory
 .vs/
+.vscode/
+
+# UnityExtended Compilations
 UnityExtended/obj/
 UnityExtended/bin/
+
+# UnityExtendedEditor Compilations
+UnityExtendedEditor/obj/
+UnityExtendedEditor/bin/
